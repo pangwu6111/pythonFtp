@@ -1,0 +1,58 @@
+name: 构建跨平台可执行文件
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            executable_suffix: .exe
+            build_name: windows
+          - os: macos-latest
+            executable_suffix: ""
+            build_name: macos
+          - os: ubuntu-latest
+            executable_suffix: ""
+            build_name: linux
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置Python环境
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: 安装依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: 构建可执行文件 (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        pyinstaller --onefile --windowed --name "FTP下载工具" ftp_gui_complete.py
+        pyinstaller --onefile --name "FTP命令行工具" ftp_downloader.py
+    
+    - name: 构建可执行文件 (macOS/Linux)
+      if: matrix.os != 'windows-latest'
+      run: |
+        pyinstaller --onefile --windowed --name "FTP下载工具" ftp_gui_complete.py
+        pyinstaller --onefile --name "FTP命令行工具" ftp_downloader.py
+    
+    - name: 上传构建产物
+      uses: actions/upload-artifact@v3
+      with:
+        name: ftp-tools-${{ matrix.build_name }}
+        path: |
+          dist/FTP下载工具${{ matrix.executable_suffix }}
+          dist/FTP命令行工具${{ matrix.executable_suffix }}
