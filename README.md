@@ -251,7 +251,7 @@ A: 尝试以下解决方案：
 ```bash
 # 1. Fork本仓库到你的账号
 # 2. 克隆你的fork
-git clone https://github.com/你的用户名/pythonFtp.git
+git clone https://github.com/pangwu6111/pythonFtp.git
 
 # 3. 创建功能分支
 git checkout -b feature/amazing-feature
