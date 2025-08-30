@@ -1,0 +1,32 @@
+# FTP断点续传下载工具 - Python依赖包
+# 
+# 注意: 本项目主要使用Python标准库，无需额外安装依赖
+# 以下列出的是编译和开发时可能需要的包
+
+# 编译工具 (可选)
+pyinstaller>=5.0.0
+
+# 开发工具 (可选)
+# pytest>=7.0.0          # 单元测试
+# black>=22.0.0           # 代码格式化
+# flake8>=4.0.0           # 代码检查
+# mypy>=0.950             # 类型检查
+
+# 核心依赖说明:
+# 本项目使用以下Python标准库模块，无需单独安装:
+# - tkinter (GUI界面)
+# - ftplib (FTP协议支持)
+# - threading (多线程支持)
+# - socket (网络连接)
+# - pathlib (路径处理)
+# - datetime (时间处理)
+# - os, sys (系统接口)
+# - time (时间函数)
+
+# 如果在某些Linux发行版中tkinter未预装，可以通过以下方式安装:
+# Ubuntu/Debian: sudo apt-get install python3-tk
+# CentOS/RHEL: sudo yum install tkinter
+# Fedora: sudo dnf install python3-tkinter
+# Arch Linux: sudo pacman -S tk
+
+# 对于Windows和macOS用户，tkinter通常随Python一起安装，无需额外操作
